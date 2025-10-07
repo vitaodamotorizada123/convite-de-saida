@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namora comigo?</title>
+</head>
+
+ 
+<body>
+    <div id="conteudo">
+        <h2>Aceita namorar comigo?</h2>
+        <div style="margin: auto;width: 170px;">
+            <button style="position: fixed;display: block;" class="btn" onclick="sim()">SIM</button>
+            <button class="btn" onclick="desvia(this)" onmouseover="desvia(this)" style="position: absolute;">NÃO</button>
+        </div>
+    </div>
+
+</body>
+<style>
+
+/* Fundo com gradiente animado */
+body {
+    margin: 0;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
+
+/* Container principal */
+#conteudo {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* Texto principal */
+h2 {
+    font-size: 2.5em;
+    text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.8);
+    animation: floatText 3s ease-in-out infinite;
+}
+
+/* Botões */
+.btn {
+    background: linear-gradient(45deg, #ff6ec4, #7873f5);
+    color: white;
+    border: none;
+    padding: 14px 22px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin: 15px;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+.btn:hover {
+    transform: scale(1.15) rotate(-1deg);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 0, 255, 0.4);
+}
+
+/* Efeito pulsante no botão "SIM" */
+.btn:first-child {
+    animation: pulse 2.5s infinite;
+}
+
+/* Corações flutuantes */
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: rotate(45deg);
+    animation: floatHeart 6s linear infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -10px;
+    left: 0;
+}
+
+.heart::after {
+    left: -10px;
+    top: 0;
+}
+
+/* Animações */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes floatText {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+    70% { box-shadow: 0 0 0 25px rgba(255, 255, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+@keyframes floatHeart {
+    0% {
+        opacity: 0;
+        transform: translateY(100vh) scale(0.5) rotate(45deg);
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-10vh) scale(1.2) rotate(405deg);
+        opacity: 0;
+    }
+}
+
+
+</style>
+
+
+<script>
+    // Gera corações aleatórios flutuando
+    function criarCoracao() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        document.body.appendChild(heart);
+
+        const size = Math.random() * 20 + 10 + "px";
+        heart.style.width = size;
+        heart.style.height = size;
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = Math.random() * 4 + 4 + "s";
+
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }
+
+    setInterval(criarCoracao, 400);
+</script>
+
+
+<script>
+    function sim() {
+        alert("Você aceitou namorar comigo! :)");
+        // redireciona para um URL após clicar no SIM
+        location.href = "https://music.youtube.com/watch?v=izGwDsrQ1eQ";
+    }
+
+    function desvia(btn) {
+        // btn declarado na função
+        btn.style.position = 'absolute';
+        btn.style.bottom = geraPosicao(10, 90);
+        btn.style.left = geraPosicao(10, 90);
+        console.log('opa, desviei...');
+    }
+
+    function geraPosicao(min, max) {
+        return (Math.random() * (max - min) + min) + "%";
+    }
+
+</script>
+
+</html>
